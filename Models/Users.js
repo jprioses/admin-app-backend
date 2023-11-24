@@ -6,11 +6,11 @@ const UsersSchema = new Schema({
         required : true
     },
     name2: String,
-    surname1: {
+    surename1: {
         type: String,
         required : true
     },
-    surname2: {
+    surename2: {
         type: String,
         required : true
     },
@@ -24,7 +24,6 @@ const UsersSchema = new Schema({
         type: String,
         required : true
     },
-    role_type: String,
     photo: {
         type: String,
         default: 'default.png'
@@ -32,6 +31,11 @@ const UsersSchema = new Schema({
     docs: {
         national_id: String,
         bank_Statement: String
+    },
+    ref_buildings: {
+        type: Schema.ObjectId,
+        ref: "Buildings",
+        required : false
     },
     created_at: {
         type: Date,

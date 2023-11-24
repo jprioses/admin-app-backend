@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const connection = async() => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/pemberty_adminApp');
+        await mongoose.connect('mongodb://localhost:27017/pemberty-admin-app');
         console.log('Connected to database Pemberty aminApp');
     } catch (error) {
         console.log('here')

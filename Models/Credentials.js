@@ -9,6 +9,10 @@ const CredentialsSchema = new Schema({
         type: String,
         required : true
     },
+    role: {
+        type: String,
+        required: true
+    },
     ref_users: {
         type: Schema.ObjectId,
         ref: "Users",
