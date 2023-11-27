@@ -17,9 +17,14 @@ const ContractsSchema = new Schema({
         type: String,
         required: true
     },
-    doc_model: {
+    contract_model: {
         type: String,
-        required: true
+        default: 'contract_model_default.pdf'
+    },
+    ref_buildings: {
+        type: Schema.ObjectId,
+        ref: "Buildings",
+        required : true
     },
     ref_companies: {
         type: Schema.ObjectId,
@@ -33,7 +38,8 @@ const ContractsSchema = new Schema({
     },
     signature: String,
     fingerprint: String,
-    doc: String,
+    contract: String,
+    status: String,
     created_at: {
         type: Date,
         default: Date.now

@@ -8,7 +8,7 @@ const secret = libjwt.secret;
 const ClientError = require("../utils/errors");
 
 //next allows to pass to next middleware or function
-exports.auth = catchedAsync(async (req, res, next) => {
+const auth = async (req, res, next) => {
   if (!req.headers.authorization) {
     throw new ClientError("Must provide auth haader", 403);
   }
@@ -32,4 +32,8 @@ exports.auth = catchedAsync(async (req, res, next) => {
   }
   //Pass to the next functio in this case is the controller
   next();
-});
+};
+
+module.exports = {
+  auth: catchedAsync(auth)
+}

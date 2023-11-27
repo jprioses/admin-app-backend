@@ -10,7 +10,7 @@ const BuildingsSchema = new Schema({
     ref_companies: {
         type: Schema.ObjectId,
         ref: "Companies",
-        required : true
+        required : false
     },
     created_at: {
         type: Date,

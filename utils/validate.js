@@ -10,8 +10,21 @@ const validateNewUserData = (data) => {
         (data.role && !validator.isEmpty(data.role)) 
     );
     
-}
+};
+
+const validateNewContractsData = (data) => {
+    return (
+        (data.value && !validator.isEmpty(data.value)) &&
+        (data.date_init && !validator.isEmpty(data.date_init) )&&
+        (data.date_final && !validator.isEmpty(date_final) )&&
+        (data.type && !validator.isEmpty(data.type)) &&
+        (data.ref_buildings && !validator.isEmpty(ref_buildings)) &&
+        (data.ref_companies && !validator.isEmpty(ref_companies)) && 
+        (data.ref_users && !validator.isEmpty(ref_users))
+    );
+};
 
 module.exports = {
     validateNewUserData,
-}
+    validateNewContractsData
+};

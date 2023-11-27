@@ -6,9 +6,11 @@ const { errorResponse } = require("./utils/response");
 
 const CredentialsRoutes = require("./routes/credentials");
 const UsersRoutes = require('./routes/users');
+const BuildingsRoutes = require('./routes/buildings');
+const CompaniesRoutes = require('./routes/companies');
+const ContractsRoutes = require('./routes/contracts');
 
 const path = require("path");
-const { error } = require("console");
 
 console.log("Welcome to API Rest Permberty adminApp");
 
@@ -26,9 +28,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", express.static("client", { redirect: false }));
 
-
 app.use("/api/credentials", CredentialsRoutes);
 app.use("/api/users", UsersRoutes);
+app.use("/api/buildings", BuildingsRoutes);
+app.use("/api/companies", CompaniesRoutes);
+app.use("/api/contracts", ContractsRoutes);
 
 //Redirect all routes differents to above ones
 app.get("*", function (req, res, next) {

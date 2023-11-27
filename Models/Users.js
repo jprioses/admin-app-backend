@@ -14,23 +14,35 @@ const UsersSchema = new Schema({
         type: String,
         required : true
     },
+    commercial_name: String,
+    nit_id: Number,
     national_id: {
         type: Number,
         required : true
     },
+    birth: Date,
     address: String,
+    neigborhood: String,
+    city: String,
+    state: String,
     phone: Number,
+    type: {
+        type: String,
+        required: true
+    },
     role: {
         type: String,
         required : true
     },
-    photo: {
+    avatar: {
         type: String,
         default: 'default.png'
     },
     docs: {
         national_id: String,
-        bank_Statement: String
+        bank_statement: String,
+        rut: String,
+        camara_comercio: String
     },
     ref_buildings: {
         type: Schema.ObjectId,
