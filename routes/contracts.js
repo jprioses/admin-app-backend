@@ -11,7 +11,7 @@ router.put("/update/:id", checkAuth.auth, Controllers.updateContracts);
 router.delete("/delete/:id", checkAuth.auth, Controllers.deleteContracts);
 
 //routes to upload and get files
-router.post('/upload-file/:type/:id', [checkAuth.auth, uploads.single('file0')] ,Controllers.uploadContractsFile);
-router.get('/get-file/:type/:file', checkAuth.auth, Controllers.getContractsFile);
+//router.post('/upload-file/:type/:id', [checkAuth.auth, uploads.single('file0')] ,Controllers.uploadContractsFile);
+//router.get('/get-file/:type/:file', checkAuth.auth, Controllers.getContractsFile);
 
 module.exports = router;

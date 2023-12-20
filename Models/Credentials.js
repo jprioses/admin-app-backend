@@ -18,6 +18,11 @@ const CredentialsSchema = new Schema({
         ref: "Users",
         required : false
     },
+    permissions: [{
+        type: Schema.ObjectId,
+        ref: "Buildings",
+        required : false
+    }],
     created_at: {
         type: Date,
         default: Date.now

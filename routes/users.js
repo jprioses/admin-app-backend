@@ -15,7 +15,7 @@ router.put('/update-many/:ref_buildings', checkAuth.auth, Controllers.updateUser
 router.delete('/delete/:id', checkAuth.auth, Controllers.deleteUsersById);
 
 //routes to upload and get files
-router.post('/upload-file/:type/:id', [checkAuth.auth, uploads.single('file0')] ,Controllers.uploadUsersFile);
-router.get('/get-file/:type/:file', checkAuth.auth, Controllers.getUsersFile);
+//router.post('/upload-file/:type/:id', [checkAuth.auth, uploads.single('file0')] ,Controllers.uploadUsersFile);
+//router.get('/get-file/:type/:file', checkAuth.auth, Controllers.getUsersFile);
 
 module.exports = router;

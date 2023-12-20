@@ -15,6 +15,7 @@ const testCredentials = (req, res) => {
 
 //Create user
 const createCredentials = async (req, res) => {
+  
   const params = req.body;
   const userId = req.params.user_id;
 
@@ -54,9 +55,25 @@ const createCredentials = async (req, res) => {
   });
 };
 
+const readUserCredentials = async (req, res) => {
+  const data = req.user
+  if (Object.keys(data).length == 0) throw new ClientError("Not user");
+  
+  const id = data._id
+  const credentials = await CredentialsServices.findCredentialsById(id)
+  
+  if (!credentials) throw new ClientError("Incorret user");
+  
+  response(res, 200, {
+    _id: credentials._id,
+    username: credentials.username,
+    ref_users: credentials.ref_users,
+    role: credentials.role
+  })
+}
+
 const readCredentials = async (req, res) => {
   const userId = req.params.user_id;
-
   //Get user credentials
   const credentials = await CredentialsServices.findCredentials({
     ref_users: userId,
@@ -97,7 +114,7 @@ const login = async (req, res) => {
   if (!pwd) throw new ClientError("Incorret password");
 
   const token = JwtService.createToken(credentials[0]);
-
+    console.log(token)
   response(res, 200, {
     _id: credentials._id,
     username: credentials.username,
@@ -180,6 +197,7 @@ module.exports = {
   testCredentials,
   createCredentials: catchedAsync(createCredentials),
   readCredentials: catchedAsync(readCredentials),
+  readUserCredentials: catchedAsync(readUserCredentials),
   login: catchedAsync(login),
   updateCredentials: catchedAsync(updateCredentials),
   deleteCredentials: catchedAsync(deleteCredentials)

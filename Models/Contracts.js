@@ -5,6 +5,7 @@ const ContractsSchema = new Schema({
         type: Number,
         required : true
     },
+    number: Number,
     date_init: {
         type: Date,
         required: true
