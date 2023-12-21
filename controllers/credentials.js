@@ -114,7 +114,6 @@ const login = async (req, res) => {
   if (!pwd) throw new ClientError("Incorret password");
 
   const token = JwtService.createToken(credentials[0]);
-    console.log(token)
   response(res, 200, {
     _id: credentials._id,
     username: credentials.username,
