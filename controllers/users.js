@@ -36,7 +36,10 @@ const createUsers = async (req, res) => {
 };
 
 const readUsers = async (req, res) => {
-  const params = req.body;
+  const params = {}
+  
+  req.params.ref_buildings && (params.ref_buildings = req.params.ref_buildings);
+  req.params.ref__companies && (params.ref_companies = req.params.ref__companies);
 
   const users = await UsersServices.findUsers(params);
 

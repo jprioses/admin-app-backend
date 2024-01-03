@@ -10,6 +10,7 @@ const catchedAsync = require("../utils/catchedAsync");
 const createContracts = async (req, res) => {
   const params = req.body;
 
+  params.ref_users = req.params.ref_users;
   params.ref_buildings = req.params.ref_buildings;
 
   let checkData = validate.validateNewContractsData(params);
@@ -22,8 +23,11 @@ const createContracts = async (req, res) => {
 };
 
 const readContracts = async (req, res) => {
-  const params = req.body;
-  params.ref_buildings = req.params.ref_buildings;
+  const params = {}
+  req.params.ref_buildings && (params.ref_buildings = req.params.ref_buildings);
+  req.params.ref_users && (params.ref_users = req.params.ref_users);
+  req.params.ref__companies && (params.ref_companies = req.params.ref__companies);
+  
   const contracts = await ContractsServices.findContracts(params);
 
   if (!contracts) throw new ClientError("Error while searching contracts");
