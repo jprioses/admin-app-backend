@@ -1,11 +1,11 @@
 const Users = require("../Models/Users");
 
 const findUsersById = (id) => {
-  return Users.findById(id).then((user) => user);
+  return Users.findById(id).populate(['ref_buildings']);
 };
 
 const findUsers = (params) => {
-  return Users.find(params).then((user) => user);
+  return Users.find(params);
 };
 
 const createUsers = (data) => {

@@ -6,11 +6,11 @@ const UsersSchema = new Schema({
         required : true
     },
     name2: String,
-    surename1: {
+    surname1: {
         type: String,
         required : true
     },
-    surename2: {
+    surname2: {
         type: String,
         required : true
     },
@@ -21,11 +21,20 @@ const UsersSchema = new Schema({
         required : true
     },
     birth: Date,
+    genere: String,
     address: String,
     neigborhood: String,
     city: String,
     state: String,
+    status: String,
     phone: Number,
+    emergency_contact: {
+        name: String,
+        surname: String,
+        address: String,
+        phone: Number,
+        relatioship: String
+    },
     type: {
         type: String,
         required: true

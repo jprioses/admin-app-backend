@@ -37,6 +37,7 @@ const ContractsSchema = new Schema({
         ref: "Users",
         required : true
     },
+    activity: String,
     signature: String,
     fingerprint: String,
     contract: String,
