@@ -23,9 +23,10 @@ const CompaniesSchema = new Schema({
         required : true
     },
     nit_id: {
-        type: Number,
+        type: String,
         required : true
     },
+    city: String,
     address: String,
     phone: Number,
     role: {

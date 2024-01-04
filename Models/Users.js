@@ -34,6 +34,7 @@ const UsersSchema = new Schema({
         type: String,
         required : true
     },
+    activity: String,
     avatar: {
         type: String,
         default: 'default.png'

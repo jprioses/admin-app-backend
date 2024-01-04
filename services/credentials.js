@@ -5,11 +5,11 @@ const createCredentials = (data) => {
 };
 
 const findCredentialsById = (id) => {
-  return Credentials.findById(id);
+  return Credentials.findById(id).populate(['ref_users']);
 };
 
 const findCredentials = (params) => {
-  return Credentials.find(params);
+  return Credentials.find(params).populate(['ref_users']);
 };
 
 const updateCredentials = (id, params) => {

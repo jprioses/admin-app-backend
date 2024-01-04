@@ -7,11 +7,11 @@ const ContractsSchema = new Schema({
     },
     number: Number,
     date_init: {
-        type: Date,
+        type: String,
         required: true
     },
     date_final: {
-        type: Date,
+        type: String,
         required: true
     },
     type: {

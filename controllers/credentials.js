@@ -68,7 +68,8 @@ const readUserCredentials = async (req, res) => {
     _id: credentials._id,
     username: credentials.username,
     ref_users: credentials.ref_users,
-    role: credentials.role
+    role: credentials.role,
+    permissions: credentials.permissions
   })
 }
 
@@ -78,7 +79,7 @@ const readCredentials = async (req, res) => {
   const credentials = await CredentialsServices.findCredentials({
     ref_users: userId,
   });
-
+  
   if (!credentials) throw new ClientError("Incorret user");
 
   if (credentials.length > 0) {
@@ -86,8 +87,23 @@ const readCredentials = async (req, res) => {
       _id: credentials[0]._id,
       username: credentials[0].username,
       ref_users: credentials[0].ref_users,
-      role: credentials[0].role
+      role: credentials[0].role,
+      permissions: credentials[0].permissions
     });
+  } else {
+    response(res, 200, {});
+  }
+};
+
+const readAllCredentials = async (req, res) => {
+  const params = {}
+  //Get user credentials
+  const credentials = await CredentialsServices.findCredentials(params);
+  
+  if (!credentials) throw new ClientError("Incorret user");
+
+  if (credentials.length > 0) {
+    response(res, 200, credentials)
   } else {
     response(res, 200, {});
   }
@@ -195,8 +211,9 @@ const deleteCredentials = async (req,res) => {
 module.exports = {
   testCredentials,
   createCredentials: catchedAsync(createCredentials),
-  readCredentials: catchedAsync(readCredentials),
   readUserCredentials: catchedAsync(readUserCredentials),
+  readCredentials: catchedAsync(readCredentials),
+  readAllCredentials: catchedAsync(readAllCredentials),
   login: catchedAsync(login),
   updateCredentials: catchedAsync(updateCredentials),
   deleteCredentials: catchedAsync(deleteCredentials)

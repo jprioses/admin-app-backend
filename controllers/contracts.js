@@ -26,7 +26,7 @@ const readContracts = async (req, res) => {
   const params = {}
   req.params.ref_buildings && (params.ref_buildings = req.params.ref_buildings);
   req.params.ref_users && (params.ref_users = req.params.ref_users);
-  req.params.ref__companies && (params.ref_companies = req.params.ref__companies);
+  req.params.ref_companies && (params.ref_companies = req.params.ref_companies);
   
   const contracts = await ContractsServices.findContracts(params);
 

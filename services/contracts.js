@@ -5,11 +5,11 @@ const createContracts = (data) => {
 };
 
 const findContractsById = (id) => {
-  return Contracts.findById(id).then((user) => user);
+  return Contracts.findById(id).populate(['ref_users', 'ref_companies', 'ref_buildings']);
 };
 
 const findContracts = (params) => {
-  return Contracts.find(params).then((user) => user);
+  return Contracts.find(params).populate(['ref_users', 'ref_companies', 'ref_buildings']);
 };
 
 const updateContracts = (id, data, upsert=false, getNew=false) => {

@@ -7,11 +7,11 @@ const uploads = require('../middlewares/uploads');
 //TOODOS
 
 router.get('/test', Controllers.testUsers);
-router.post('/create/:ref_buildings?', checkAuth.auth, Controllers.createUsers);
+router.post('/create/:type/:ref_buildings?', checkAuth.auth, Controllers.createUsers);
 router.get('/read/:id', checkAuth.auth, Controllers.readUsersById);
-router.get('/read-all', checkAuth.auth, Controllers.readUsers);
-router.get('/read-by-buildings/:ref_buildings?', checkAuth.auth, Controllers.readUsers);
-router.get('/read-by-companies/:ref_companies?', checkAuth.auth, Controllers.readUsers);
+router.get('/read-all/:type', checkAuth.auth, Controllers.readUsers);
+router.get('/read-by-buildings/:type/:ref_buildings', checkAuth.auth, Controllers.readUsers);
+router.get('/read-by-companies/:type/:ref_companies', checkAuth.auth, Controllers.readUsers);
 router.put('/update/:id', checkAuth.auth, Controllers.updateUsersById);
 router.put('/update-many/:ref_buildings', checkAuth.auth, Controllers.updateUsersByArray);
 router.delete('/delete/:id', checkAuth.auth, Controllers.deleteUsersById);

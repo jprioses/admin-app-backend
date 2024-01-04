@@ -5,6 +5,12 @@ const BuildingsSchema = new Schema({
         type: String,
         required : true
     },
+    nit_id: {
+        type: String,
+        required : true
+    },
+    city: String,
+    neighborhood: String,
     address: String,
     description: String,
     ref_companies: {
