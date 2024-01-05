@@ -13,15 +13,22 @@ const CredentialsSchema = new Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        required: true
+    },
     ref_users: {
         type: Schema.ObjectId,
         ref: "Users",
         required : false
     },
     permissions: [{
-        type: Schema.ObjectId,
-        ref: "Buildings",
-        required : false
+        ref_buildings: {
+            type: Schema.ObjectId,
+            ref: "Buildings",
+            required : false
+        },
+        name: String
     }],
     created_at: {
         type: Date,

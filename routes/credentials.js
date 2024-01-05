@@ -7,7 +7,7 @@ const checkAuth = require('../middlewares/auth');
 //TOODOS
 //Chenge middlewares and services
 
-router.get('/test', checkAuth.auth, Controllers.testCredentials);
+router.post('/test-create/:user_id', Controllers.createCredentials);
 router.post('/login', Controllers.login);
 router.post('/create/:user_id', checkAuth.auth, Controllers.createCredentials);
 router.get('/read/:user_id', checkAuth.auth, Controllers.readCredentials);

@@ -51,7 +51,9 @@ const createCredentials = async (req, res) => {
     _id: credentials._id,
     username: credentials.username,
     ref_users: credentials.ref_users,
-    role: credentials.role
+    role: credentials.role,
+    type: credentials.type,
+    permissions: credentials.permissions
   });
 };
 
@@ -69,6 +71,7 @@ const readUserCredentials = async (req, res) => {
     username: credentials.username,
     ref_users: credentials.ref_users,
     role: credentials.role,
+    type: credentials.type,
     permissions: credentials.permissions
   })
 }
@@ -88,6 +91,7 @@ const readCredentials = async (req, res) => {
       username: credentials[0].username,
       ref_users: credentials[0].ref_users,
       role: credentials[0].role,
+      type: credentials[0].type,
       permissions: credentials[0].permissions
     });
   } else {
@@ -135,6 +139,8 @@ const login = async (req, res) => {
     username: credentials.username,
     ref_users: credentials.ref_users,
     role: credentials.role,
+    type: credentials.type,
+    permissions: credentials.permissions,
     token,
   });
 };
@@ -186,7 +192,9 @@ const updateCredentials = async (req, res) => {
       _id: newCredentials._id,
       username: newCredentials.username,
       ref_users: newCredentials.ref_users,
-      role: newCredentials.role
+      role: newCredentials.role,
+      type: newCredentials.type,
+      permissions: newCredentials.permissions
     });
   } else {
     throw new ClientError("Couldn't update credentials");
@@ -204,7 +212,9 @@ const deleteCredentials = async (req,res) => {
     _id: credentials._id,
     username: credentials.username,
     ref_users: credentials.ref_users,
-    role: credentials.role
+    role: credentials.role,
+    type: credentials.type,
+    permissions: credentials.permissions
   })
 }
 

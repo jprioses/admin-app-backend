@@ -14,15 +14,18 @@ const testUsers = (req, res) => {
   });
 };
 
+
 const createUsers = async (req, res) => {
   const params = req.body;
-
-  params.ref_buildings = req.params.ref_buildings;
-
-  let checkData = validate.validateNewUserData(params);
-
+  
+  params.type = req.params.type;
+  
+  req.params.ref_buildings && (params.ref_buildings = req.params.ref_buildings);
+  
+  const checkData = validate.validateNewUserData(params);
+  
   if (!checkData) throw new ClientError("Missing some data");
-
+ 
   if (params.national_id) {
     const user = await UsersServices.findUsers({
       national_id: params.national_id,
@@ -180,7 +183,6 @@ const getUsersFile = async (req, res) => {
 };
 
 module.exports = {
-  testUsers,
   createUsers: catchedAsync(createUsers),
   readUsers: catchedAsync(readUsers),
   readUsersById: catchedAsync(readUsersById),

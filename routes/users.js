@@ -6,7 +6,7 @@ const uploads = require('../middlewares/uploads');
 
 //TOODOS
 
-router.get('/test', Controllers.testUsers);
+router.post('/test-create/:type', Controllers.createUsers);
 router.post('/create/:type/:ref_buildings?', checkAuth.auth, Controllers.createUsers);
 router.get('/read/:id', checkAuth.auth, Controllers.readUsersById);
 router.get('/read-all/:type', checkAuth.auth, Controllers.readUsers);
