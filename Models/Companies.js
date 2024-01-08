@@ -29,7 +29,7 @@ const CompaniesSchema = new Schema({
     city: String,
     address: String,
     phone: Number,
-    role: {
+    activity: {
         type: String,
         required : true
     },

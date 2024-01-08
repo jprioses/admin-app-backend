@@ -7,7 +7,7 @@ const ClientError = require("../utils/errors");
 const createCompanies = async (req, res) => {
   const params = req.body;
 
-  if (!params.name) throw new ClientError("Must type company name");
+  if (!params.commercial_name) throw new ClientError("Must type company name");
 
   const company = await CompaniesServices.createCompanies(params);
 
