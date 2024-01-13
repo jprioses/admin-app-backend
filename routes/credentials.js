@@ -9,7 +9,7 @@ const checkAuth = require('../middlewares/auth');
 
 router.post('/test-create/:user_id', Controllers.createCredentials);
 router.post('/login', Controllers.login);
-router.post('/create/:user_id', checkAuth.auth, Controllers.createCredentials);
+router.post('/create', checkAuth.auth, Controllers.createCredentials);
 router.get('/read/:user_id', checkAuth.auth, Controllers.readCredentials);
 router.get('/read-user', checkAuth.auth, Controllers.readUserCredentials);
 router.get('/read-all', checkAuth.auth, Controllers.readAllCredentials);

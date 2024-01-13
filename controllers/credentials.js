@@ -6,6 +6,7 @@ const EncryptServices = require("../services/encrypt");
 const catchedAsync = require("../utils/catchedAsync");
 const { response } = require("../utils/response");
 const ClientError = require("../utils/errors");
+const validate = require("../utils/validate");
 
 //test controller
 const testCredentials = (req, res) => {
@@ -17,10 +18,16 @@ const testCredentials = (req, res) => {
 const createCredentials = async (req, res) => {
   
   const params = req.body;
-  const userId = req.params.user_id;
+  const userId = params.ref_users;
 
-  if (!params.username || !params.password || !params.role)
-    throw new ClientError("Username, password and role are mandatory");
+  if (!userId) throw new ClientError("Must give user");
+
+  const checkData = validate.validateCredentialsData(params);
+  
+  if (!checkData)throw new ClientError("Missing some data");
+ 
+  
+  if (params.password != params.password_confirm) throw new ClientError("Passwords must equal");
 
   const credentialsQuery = await CredentialsServices.findCredentials({
     username: params.username.toLowerCase(),
@@ -117,7 +124,7 @@ const login = async (req, res) => {
   const params = req.body;
 
   if (!params.username || !params.password)
-    throw new ClientError("Must type username and password");
+    throw new ClientError("Must give username and password");
 
   const credentials = await CredentialsServices.findCredentials({
     username: params.username.toLowerCase(),
@@ -159,12 +166,16 @@ const updateCredentials = async (req, res) => {
 
   if (bodyParams.username && bodyParams.username.length > 0)
     params.username = bodyParams.username;
+
   if (bodyParams.password) {
+
     //get and decrypt old password
 
     if (!bodyParams.new_password || bodyParams.new_password.length == 0)
-      throw new ClientError("Must provide a new password");
-
+    throw new ClientError("Must provide a new password");
+  
+    if (bodyParams.new_password != bodyParams.password_confirm) throw new ClientError("Passwords must equal");
+    
     const oldPwd = EncryptServices.decryptPassword(
       bodyParams.password,
       credentials[0].password
@@ -176,6 +187,8 @@ const updateCredentials = async (req, res) => {
     const pwd = await EncryptServices.encryptPassword(bodyParams.new_password);
 
     params.password = pwd;
+  } else {
+    throw new ClientError("Must provide old password");
   }
 
   //update credentials qith new password and username
@@ -186,7 +199,7 @@ const updateCredentials = async (req, res) => {
       params
     );
 
-    if (!newCredentials) throw new ClientError("Couldn´t update credentials");
+    if (!newCredentials) throw new ClientError("Couldn't update credentials");
 
     response(res, 200, {
       _id: newCredentials._id,
@@ -206,7 +219,7 @@ const deleteCredentials = async (req,res) => {
 
   const credentials = await CredentialsServices.deleteCredentials({ref_users: userId,})
 
-  if (!credentials) throw new ClientError('Couldnt delete credentials');
+  if (!credentials) throw new ClientError("Couldn't delete credentials");
 
   response(res, 200, {
     _id: credentials._id,

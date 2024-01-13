@@ -20,7 +20,7 @@ const UsersSchema = new Schema({
         type: Number,
         required : true
     },
-    birth: Date,
+    birth: String,
     gender: String,
     address: String,
     neigborhood: String,

@@ -20,7 +20,7 @@ const createUsers = async (req, res) => {
   
   params.type = req.params.type;
    
-  const checkData = validate.validateNewUserData(params);
+  const checkData = validate.validateUserData(params);
   
   if (!checkData) throw new ClientError("Missing some data");
  
@@ -44,7 +44,7 @@ const readUsers = async (req, res) => {
 
   const users = await UsersServices.findUsers(params);
 
-  if (!users) throw new ClientError("Error while searching users");
+  if (!users) throw new ClientError("User not found");
 
   response(res, 200, users);
 };
@@ -54,7 +54,7 @@ const readUsersById = async (req, res) => {
 
   const user = await UsersServices.findUsersById(id);
 
-  if (!user) throw new ClientError("Error while searching user");
+  if (!user) throw new ClientError("User not found");
 
   response(res, 200, user);
 };
@@ -66,9 +66,13 @@ const updateUsersById = async (req, res) => {
   if (Object.keys(params).length == 0)
     throw new ClientError("Must enter data to update");
 
+  const checkData = validate.validateUserData(params);
+  
+  if (!checkData) throw new ClientError("Missing some data");
+
   const user = await UsersServices.updateUsers(id, params);
 
-  if (!user) throw new ClientError("User not found");
+  if (!user) throw new ClientError("Couldn't update user");
 
   response(res, 200, user);
 };
@@ -82,7 +86,7 @@ const updateUsersByArray = async (req, res) => {
     ref_buildings,
   });
 
-  if (!user) throw new ClientError("User not found");
+  if (!user) throw new ClientError("Couldn't update user");
 
   response(res, 200, user);
 };

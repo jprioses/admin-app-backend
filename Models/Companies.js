@@ -26,13 +26,13 @@ const CompaniesSchema = new Schema({
         type: String,
         required : true
     },
-    city: String,
-    address: String,
-    phone: Number,
     activity: {
         type: String,
         required : true
     },
+    city: String,
+    address: String,
+    phone: Number,
     docs: {
         rut: String,
         camara_comercio: String

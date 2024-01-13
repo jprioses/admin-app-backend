@@ -13,7 +13,7 @@ const createContracts = async (req, res) => {
   params.ref_users = req.params.ref_users;
   params.ref_buildings = req.params.ref_buildings;
 
-  let checkData = validate.validateNewContractsData(params);
+  let checkData = validate.validateContractsData(params);
 
   if (!checkData) throw new ClientError("Missing some data");
 
@@ -30,7 +30,7 @@ const readContracts = async (req, res) => {
   
   const contracts = await ContractsServices.findContracts(params);
 
-  if (!contracts) throw new ClientError("Error while searching contracts");
+  if (!contracts) throw new ClientError("Contract not found");
 
   response(res, 200, contracts);
 };
@@ -40,7 +40,7 @@ const readContractsById = async (req, res) => {
 
   const contract = await ContractsServices.findContractsById(id);
 
-  if (!contract) throw new ClientError("Error while searching contract");
+  if (!contract) throw new ClientError("Contract not found");
 
   response(res, 200, contract);
 };
@@ -51,6 +51,10 @@ const updateContracts = async (req, res) => {
 
   if (Object.keys(params).length == 0)
     throw new ClientError("Must enter data to update");
+
+  let checkData = validate.validateContractsData(params);
+
+  if (!checkData) throw new ClientError("Missing some data");
 
   const contract = await ContractsServices.updateContracts(id, params);
 

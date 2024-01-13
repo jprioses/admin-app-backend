@@ -1,7 +1,7 @@
 const validator = require("validator");
 
-const validateNewUserData = (data) => {
-  
+const validateUserData = (data) => {
+    console.log(data)
     return (
         (data.name1 && !validator.isEmpty(data.name1)) &&
         (data.surname1 && !validator.isEmpty(data.surname1) )&&
@@ -12,19 +12,52 @@ const validateNewUserData = (data) => {
     
 };
 
-const validateNewContractsData = (data) => {
+const validateContractsData = (data) => {
+    console.log(data)
     return (
         (data.value && !validator.isEmpty(data.value)) &&
         (data.date_init && !validator.isEmpty(data.date_init) )&&
-        (data.date_final && !validator.isEmpty(date_final) )&&
+        (data.date_final && !validator.isEmpty(data.date_final) )&&
         (data.type && !validator.isEmpty(data.type)) &&
-        (data.ref_buildings && !validator.isEmpty(ref_buildings)) &&
-        (data.ref_companies && !validator.isEmpty(ref_companies)) && 
-        (data.ref_users && !validator.isEmpty(ref_users))
+        (data.ref_buildings && !validator.isEmpty(data.ref_buildings)) &&
+        (data.ref_companies && !validator.isEmpty(data.ref_companies)) && 
+        (data.ref_users && !validator.isEmpty(data.ref_users))
     );
 };
 
+const validateCompaniesData = (data) => {
+    return (
+        (data.name1 && !validator.isEmpty(data.name1)) &&
+        (data.surname1 && !validator.isEmpty(data.surname1) )&&
+        (data.surname2 && !validator.isEmpty(data.surname2) )&&
+        (data.national_id && !validator.isEmpty(data.national_id)) &&
+        (data.nit_id && !validator.isEmpty(data.nit_id)) &&
+        (data.commercial_name && !validator.isEmpty(data.commercial_name)) &&
+        (data.activity && !validator.isEmpty(data.activity)) 
+    );
+}
+
+const validateBuildingsData = (data) => {
+    return (
+        (data.name && !validator.isEmpty(data.name)) &&
+        (data.nit_id && !validator.isEmpty(data.nit_id))
+    );
+}
+
+const validateCredentialsData = (data) => {
+    console.log(data)
+    return (
+        (data.username && !validator.isEmpty(data.username)) &&
+        (data.password && !validator.isEmpty(data.password)) && 
+        (data.password_confirm && !validator.isEmpty(data.password_confirm)) &&
+        (data.type && !validator.isEmpty(data.type))
+    );
+}
+
 module.exports = {
-    validateNewUserData,
-    validateNewContractsData
+    validateUserData,
+    validateContractsData,
+    validateBuildingsData,
+    validateCompaniesData,
+    validateCredentialsData
 };

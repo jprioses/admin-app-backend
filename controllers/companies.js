@@ -2,12 +2,14 @@ const CompaniesServices = require("../services/companies");
 const catchedAsync = require("../utils/catchedAsync");
 const { response } = require("../utils/response");
 const ClientError = require("../utils/errors");
-
+const validate =require('../utils/validate')
 
 const createCompanies = async (req, res) => {
   const params = req.body;
 
-  if (!params.commercial_name) throw new ClientError("Must type company name");
+  let checkData = validate.validateCompaniesData(params);
+
+  if (!checkData) throw new ClientError("Missing some data");
 
   const company = await CompaniesServices.createCompanies(params);
 
@@ -18,7 +20,7 @@ const readCompanies = async (req, res) => {
   const params = req.body;
   const companies = await CompaniesServices.findCompanies(params);
 
-  if (!companies) throw new ClientError("Error while searching companies");
+  if (!companies) throw new ClientError("Company not found");
 
   response(res, 200, companies);
 };
@@ -28,7 +30,7 @@ const readCompaniesById = async (req, res) => {
 
   const company = await CompaniesServices.findCompaniesById(id);
 
-  if (!company) throw new ClientError("Error while searching company");
+  if (!company) throw new ClientError("Company not found");
 
   response(res, 200, company);
 };
