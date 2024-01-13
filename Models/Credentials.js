@@ -23,12 +23,9 @@ const CredentialsSchema = new Schema({
         required : false
     },
     permissions: [{
-        ref_buildings: {
-            type: Schema.ObjectId,
-            ref: "Buildings",
-            required : false
-        },
-        name: String
+        type: Schema.ObjectId,
+        ref: "Buildings",
+        required : false 
     }],
     created_at: {
         type: Date,

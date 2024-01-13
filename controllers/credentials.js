@@ -162,7 +162,7 @@ const updateCredentials = async (req, res) => {
   if (bodyParams.password) {
     //get and decrypt old password
 
-    if (!bodyParams.newPassword || bodyParams.newPassword.length == 0)
+    if (!bodyParams.new_password || bodyParams.new_password.length == 0)
       throw new ClientError("Must provide a new password");
 
     const oldPwd = EncryptServices.decryptPassword(
@@ -173,7 +173,7 @@ const updateCredentials = async (req, res) => {
     if (!oldPwd) throw new ClientError("Incorret password");
 
     //encrypt new password
-    const pwd = await EncryptServices.encryptPassword(bodyParams.newPassword);
+    const pwd = await EncryptServices.encryptPassword(bodyParams.new_password);
 
     params.password = pwd;
   }

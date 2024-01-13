@@ -19,9 +19,7 @@ const createUsers = async (req, res) => {
   const params = req.body;
   
   params.type = req.params.type;
-  
-  req.params.ref_buildings && (params.ref_buildings = req.params.ref_buildings);
-  
+   
   const checkData = validate.validateNewUserData(params);
   
   if (!checkData) throw new ClientError("Missing some data");

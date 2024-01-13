@@ -5,7 +5,7 @@ const findUsersById = (id) => {
 };
 
 const findUsers = (params) => {
-  return Users.find(params);
+  return Users.find(params).populate(['ref_buildings']);
 };
 
 const createUsers = (data) => {

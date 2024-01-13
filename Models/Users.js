@@ -21,20 +21,18 @@ const UsersSchema = new Schema({
         required : true
     },
     birth: Date,
-    genere: String,
+    gender: String,
     address: String,
     neigborhood: String,
     city: String,
     state: String,
     status: String,
     phone: Number,
-    emergency_contact: {
-        name: String,
-        surname: String,
-        address: String,
-        phone: Number,
-        relatioship: String
-    },
+    emergency_name: String,
+    emergency_surname: String,
+    emergency_address: String,
+    emergency_phone: Number,
+    emergency_relatioship: String,
     type: {
         type: String,
         required: true
