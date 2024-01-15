@@ -153,38 +153,33 @@ const login = async (req, res) => {
 };
 
 const updateCredentials = async (req, res) => {
-  const userId = req.params.user_id;
-  const bodyParams = req.body;
-  const params = {};
-
+  const id = req.params.id;
+  const params = req.body;
   //Get user credentials
   const credentials = await CredentialsServices.findCredentials({
-    ref_users: userId,
+    _id: id,
   });
 
-  if (!credentials) throw new ClientError("Incorret user");
+  if (!credentials || credentials.length == 0) throw new ClientError("Incorret user");
 
-  if (bodyParams.username && bodyParams.username.length > 0)
-    params.username = bodyParams.username;
-
-  if (bodyParams.password) {
+  if (params.password) {
 
     //get and decrypt old password
 
-    if (!bodyParams.new_password || bodyParams.new_password.length == 0)
+    if (!params.new_password || params.new_password.length == 0)
     throw new ClientError("Must provide a new password");
   
-    if (bodyParams.new_password != bodyParams.password_confirm) throw new ClientError("Passwords must equal");
-    
+    if (params.new_password != params.password_confirm) throw new ClientError("Passwords must equal");
+   
     const oldPwd = EncryptServices.decryptPassword(
-      bodyParams.password,
+      params.password,
       credentials[0].password
     );
 
     if (!oldPwd) throw new ClientError("Incorret password");
 
     //encrypt new password
-    const pwd = await EncryptServices.encryptPassword(bodyParams.new_password);
+    const pwd = await EncryptServices.encryptPassword(params.new_password);
 
     params.password = pwd;
   } else {

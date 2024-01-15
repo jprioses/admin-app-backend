@@ -2,7 +2,7 @@ const {Schema, model} = require('mongoose');
 
 const ContractsSchema = new Schema({
     value: {
-        type: Number,
+        type: String,
         required : true
     },
     number: Number,
@@ -41,7 +41,10 @@ const ContractsSchema = new Schema({
     signature: String,
     fingerprint: String,
     contract: String,
-    status: String,
+    status: {
+        type: String,
+        required: true
+    },
     created_at: {
         type: Date,
         default: Date.now

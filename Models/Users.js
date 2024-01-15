@@ -17,8 +17,12 @@ const UsersSchema = new Schema({
     commercial_name: String,
     nit_id: Number,
     national_id: {
-        type: Number,
+        type: String,
         required : true
+    },
+    status: {
+        type: String,
+        required: true
     },
     birth: String,
     gender: String,
@@ -26,7 +30,6 @@ const UsersSchema = new Schema({
     neigborhood: String,
     city: String,
     state: String,
-    status: String,
     phone: Number,
     emergency_name: String,
     emergency_surname: String,
@@ -41,7 +44,7 @@ const UsersSchema = new Schema({
         type: String,
         required : true
     },
-    activity: String,
+    services: String,
     avatar: {
         type: String,
         default: 'default.png'

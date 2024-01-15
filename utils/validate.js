@@ -1,13 +1,13 @@
 const validator = require("validator");
 
 const validateUserData = (data) => {
-    console.log(data)
     return (
         (data.name1 && !validator.isEmpty(data.name1)) &&
         (data.surname1 && !validator.isEmpty(data.surname1) )&&
         (data.surname2 && !validator.isEmpty(data.surname2) )&&
         (data.national_id && !validator.isEmpty(data.national_id)) &&
-        (data.role && !validator.isEmpty(data.role)) 
+        (data.role && !validator.isEmpty(data.role)) &&
+        (data.status && !validator.isEmpty(data.status)) 
     );
     
 };
@@ -21,7 +21,8 @@ const validateContractsData = (data) => {
         (data.type && !validator.isEmpty(data.type)) &&
         (data.ref_buildings && !validator.isEmpty(data.ref_buildings)) &&
         (data.ref_companies && !validator.isEmpty(data.ref_companies)) && 
-        (data.ref_users && !validator.isEmpty(data.ref_users))
+        (data.ref_users && !validator.isEmpty(data.ref_users)) &&
+        (data.status && !validator.isEmpty(data.status)) 
     );
 };
 
