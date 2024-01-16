@@ -41,6 +41,7 @@ app.get("*", function (req, res, next) {
 
 //This middleware with error as parameter is the error handler function wich express is going to use
 app.use((err, req, res, next) => {
+  console.log(err)
   if (err.name == "CastError") {
     err.message = "Couldn't find document";
     err.statusCode = 500;
