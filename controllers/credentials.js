@@ -18,7 +18,7 @@ const testCredentials = (req, res) => {
 const createCredentials = async (req, res) => {
   
   const params = req.body;
-  const userId = params.ref_users;
+  const userId = req.params.user_id || params.ref_users;
 
   if (!userId) throw new ClientError("Must give user");
 
